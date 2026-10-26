@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  veriquant-terminal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: veriquant-hsk-terminal
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HSK_MAINNET_RPC_URL=https://mainnet.hsk.xyz
+      - CHAIN_ID=177
+      - HSK_TESTNET_RPC_URL=https://testnet.hsk.xyz
+      - TESTNET_CHAIN_ID=133
+      - EXPLORER_URL=https://hashkey.subscan.io
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/status || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 45M

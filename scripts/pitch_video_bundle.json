@@ -1,0 +1,34 @@
+{
+  "title": "VeriQuant HSK Institutional Pitch Video & Voiceover Package",
+  "hackathon": "HSK Chain Horizon Hackathon (Mumbai Edition)",
+  "generatedAt": "2026-10-26T14:33:57.168Z",
+  "videoFile": "C:\\Users\\WALTON\\.gemini\\antigravity\\scratch\\veriquant-hsk\\VeriQuant_HSK_Institutional_Pitch.mp4",
+  "fileSizeBytes": 6995498,
+  "durationFormatted": "00:02:20.00",
+  "resolution": "1920x1080 @ 60fps",
+  "videoCodec": "H.264 (libx264, yuv420p)",
+  "audioCodec": "AAC (192 kbps)",
+  "voiceover": {
+    "engine": "Neural Edge-TTS (en-US-ChristopherNeural) + Windows SAPI",
+    "durationTotalSec": 140,
+    "stages": {
+      "stage1": "Custody & Architecture [0:00 - 0:30]",
+      "stage2": "Mumbai Hinglish NLP & Monte Carlo Stochastic Fan Chart [0:30 - 1:10]",
+      "stage3": "Whale Backrun Dislocation, Stop-Loss Circuit Breaker & CCIP [1:10 - 1:50]",
+      "stage4": "HSP Proof-of-Alpha Stream & HashKey Compliance Audit Dossier [1:50 - 2:20]"
+    }
+  },
+  "hskChainProof": {
+    "chainId": 177,
+    "network": "HSK Mainnet",
+    "rpc": "https://mainnet.hsk.xyz",
+    "consensusScore": "96.4%",
+    "monteCarloPaths": 1000,
+    "ccipLanes": [
+      "Ethereum",
+      "Arbitrum",
+      "Base"
+    ]
+  },
+  "status": "FINALIZED_FOR_JUDGES"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "veriquant-hsk-terminal",
+  "version": "1.0.0",
+  "description": "Institutional Quant Execution Terminal & Non-Custodial Session Vault for HSK Chain",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "compile": "node contracts/compile.js",
+    "video": "node scripts/generate_pitch_video.js",
+    "screenshots": "node scripts/capture_screenshots.js"
+  },
+  "keywords": [
+    "hsk-chain",
+    "hashkey",
+    "defi",
+    "quantitative-trading",
+    "ai-agents",
+    "chainlink-ccip",
+    "hsp-protocol",
+    "session-vault"
+  ],
+  "author": "VeriQuant Institutional Team",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.17.0",
+    "playwright": "^1.64.1",
+    "solc": "^0.8.24",
+    "ws": "^8.22.0"
+  }
+}

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeriQuant HSK | Institutional AI Agent Trading & HSP A2A Terminal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Live HSK Chain Mainnet Telemetry Bar -->
+  <header class="telemetry-bar">
+    <div class="brand-group">
+      <div class="brand-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" stroke="#00e599" stroke-width="2" fill="#00e59915"/>
+          <circle cx="12" cy="12" r="3.5" fill="#00e599"/>
+        </svg>
+      </div>
+      <div class="brand-title">
+        <span class="brand-name">VERIQUANT <span class="accent-text">HSK</span></span>
+        <span class="brand-tag">HSK CHAIN HORIZON FLAGSHIP • MUMBAI EDITION</span>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Badges -->
+    <div class="telemetry-metrics">
+      <div class="telemetry-badge">
+        <span class="badge-dot pulse-emerald"></span>
+        <span class="badge-label">HSK MAINNET:</span>
+        <span class="badge-val" id="top-block-num">29,315,914</span>
+      </div>
+
+      <div class="telemetry-badge">
+        <span class="badge-label">GAS:</span>
+        <span class="badge-val" id="top-gas-price">500.0 Gwei</span>
+      </div>
+
+      <div class="telemetry-badge">
+        <span class="badge-label">RPC LATENCY:</span>
+        <span class="badge-val" id="top-rpc-latency">74 ms</span>
+      </div>
+
+      <div class="telemetry-badge state-badge" id="loop-state-container">
+        <span class="badge-label">STATE:</span>
+        <span class="state-indicator" id="loop-state-text">MONITORING</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="header-actions">
+      <div class="network-selector">
+        <select id="network-select" onchange="switchNetwork(this.value)">
+          <option value="mainnet" selected>HSK Mainnet (177)</option>
+          <option value="testnet">HSK Testnet (133)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-cinema pulse-cinema" id="btn-auto-pitch" onclick="toggleCinemaPitch()" title="Launch Automated Institutional Pitch with Neural Voice & HD Video Capture">
+        <span class="rec-dot"></span>
+        <span>🎬 Auto-Play & Record Institutional Pitch (HD + Voice)</span>
+      </button>
+
+      <button class="btn btn-outline" id="btn-export-dossier" onclick="exportComplianceDossier()" title="Download Signed Institutional Compliance Bundle">
+        📜 Export HashKey Institutional Audit (.json)
+      </button>
+
+      <button class="btn btn-primary" id="btn-connect-wallet" onclick="openDeployerModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="3"/>
+          <path d="M16 12h.01"/>
+          <path d="M2 10h20"/>
+        </svg>
+        <span>Connect & Deploy Vault</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Institutional Workspace (3 Columns) -->
+  <main class="terminal-workspace">
+    <!-- COLUMN 1: Conversational Quant Co-Pilot (Track 1) -->
+    <section class="panel panel-left">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="panel-title">Intent-to-Calldata Co-Pilot</span>
+        </div>
+        <span class="track-badge">TRACK 1: AI TRADING</span>
+      </div>
+
+      <!-- Institutional 1-Click Scenarios -->
+      <div class="scenarios-container">
+        <div class="scenario-label">INSTITUTIONAL BENCHMARK SCENARIOS</div>
+        <div class="scenario-grid">
+          <button class="scenario-btn" onclick="triggerScenario(1)">
+            <span class="sc-title">1. Delta-Neutral Spread Hunter</span>
+            <span class="sc-desc">Cap $250, 1.0% SL, hunt >15 bps spread</span>
+          </button>
+          <button class="scenario-btn" onclick="triggerScenario(2)">
+            <span class="sc-title">2. Stealth Micro-TWAP Order</span>
+            <span class="sc-desc">Slice large order; evade sandwich bot impact</span>
+          </button>
+          <button class="scenario-btn alert-scenario" onclick="triggerScenario(3)">
+            <span class="sc-title">3. Black-Swan Crash (-15%)</span>
+            <span class="sc-desc">Verify autonomous on-chain stop-loss de-risk</span>
+          </button>
+          <button class="scenario-btn" onclick="triggerScenario(4)">
+            <span class="sc-title">4. HSP Proof-of-Alpha Audit</span>
+            <span class="sc-desc">Verify 3-agent A2A cryptographic receipts</span>
+          </button>
+          <button class="scenario-btn special-mumbai-btn" onclick="triggerScenario(5)">
+            <span class="sc-title">🇮🇳 5. Mumbai Quant Desk (Hinglish)</span>
+            <span class="sc-desc">Bhai, 300 USDT whale-backrun & CCIP spread lagao!</span>
+          </button>
+          <button class="scenario-btn whale-btn" onclick="triggerWhaleDump()">
+            <span class="sc-title">🐋 Whale Dump & Atomic Backrun</span>
+            <span class="sc-desc">Simulate $15k dump & capture reserve surplus</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Conversational Chat History -->
+      <div class="chat-container">
+        <div class="chat-history" id="chat-messages">
+          <div class="chat-msg system-msg">
+            <div class="msg-author">QUANT CO-PILOT INITIALIZED</div>
+            <div class="msg-content">
+              Welcome to <strong>VeriQuant HSK</strong>. Live closed-loop execution is syncing with HSK Chain Mainnet (177). Enter institutional commands or use benchmark scenarios above.
+            </div>
+          </div>
+        </div>
+
+        <form class="chat-input-form" onsubmit="handleChatSubmit(event)">
+          <input
+            type="text"
+            id="chat-input"
+            class="chat-input"
+            placeholder="e.g. Cap max size at 300 USDT, tighten stop-loss to 1.2%, enable Micro-TWAP..."
+            autocomplete="off"
+          />
+          <button type="submit" class="chat-send-btn" id="chat-submit-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- EVM Hex Calldata Compiler Inspector -->
+      <div class="calldata-inspector">
+        <div class="calldata-header">
+          <span class="cd-title">COMPILED EVM CALLDATA (HSK CHAIN 177)</span>
+          <button class="btn-copy" onclick="copyCalldata()">Copy Hex</button>
+        </div>
+        <div class="calldata-func" id="calldata-func-label">setAiSessionPolicy(address,uint256,uint16,uint16,uint256,address,uint256)</div>
+        <div class="calldata-hex-box" id="calldata-hex-display">0x</div>
+        <div class="calldata-params" id="calldata-params-table">
+          <!-- Dynamic parameter breakdown -->
+        </div>
+      </div>
+    </section>
+
+    <!-- COLUMN 2: HSK Swap AMM Depth, Calculus Scanner & Equity Curve -->
+    <section class="panel panel-center">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="panel-title">HSK Swap AMM Depth & Execution Engine</span>
+        </div>
+        <div class="live-status-pill">
+          <span class="badge-dot pulse-emerald"></span>
+          <span>CALCULUS ROUTER ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Real-Time Equity Curve & Monte Carlo Canvas -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <div class="chart-mode-tabs">
+            <button class="chart-tab active" id="tab-pnl" onclick="switchChartMode('PNL')">P&L Equity Curve</button>
+            <button class="chart-tab" id="tab-mc" onclick="switchChartMode('MC')">1,000-Path Monte Carlo Fan Chart</button>
+          </div>
+          <div class="chart-stats">
+            <div class="c-stat">
+              <span class="c-label">NET P&L:</span>
+              <span class="c-val positive" id="chart-net-pnl">+$0.00 USDT</span>
+            </div>
+            <div class="c-stat">
+              <span class="c-label">WIN RATE:</span>
+              <span class="c-val" id="chart-win-rate">92.4%</span>
+            </div>
+            <div class="c-stat">
+              <span class="c-label">SHARPE:</span>
+              <span class="c-val" id="chart-sharpe">2.84</span>
+            </div>
+            <div class="c-stat">
+              <span class="c-label" id="var-label">99% VaR:</span>
+              <span class="c-val" id="chart-var">64 bps</span>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="equity-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- 3-Agent Adversarial Consensus Matrix -->
+      <div class="consensus-matrix-card">
+        <div class="cm-header">
+          <div class="cm-title-group">
+            <span class="badge-dot pulse-emerald"></span>
+            <span class="cm-title">3-AGENT ADVERSARIAL CONSENSUS MATRIX</span>
+            <span class="cm-score-pill" id="cm-score-badge">96.4% CONSENSUS</span>
+          </div>
+          <span class="cm-latency" id="cm-latency-badge">⚡ 32ms Cryptographic Consensus</span>
+        </div>
+        <div class="cm-grid">
+          <div class="cm-agent-box" id="cm-agent-alpha">
+            <div class="cm-role">[ALPHA-HUNTER]</div>
+            <div class="cm-desc">HSK Swap AMM Reserves & Mempool</div>
+            <div class="cm-vote">VOTE: <strong style="color: var(--accent-emerald);">APPROVE</strong> (96.5% Conf)</div>
+          </div>
+          <div class="cm-agent-box" id="cm-agent-ccip">
+            <div class="cm-role">[CCIP-MACRO-ORACLE]</div>
+            <div class="cm-desc">Chainlink CCIP Cross-Chain Parity</div>
+            <div class="cm-vote">VOTE: <strong style="color: var(--accent-cyan);">APPROVE</strong> (+38 bps Basis)</div>
+          </div>
+          <div class="cm-agent-box" id="cm-agent-cro">
+            <div class="cm-role">[CRO-RISK-GUARD]</div>
+            <div class="cm-desc">Kelly Sizing & HSP Micro-Escrow</div>
+            <div class="cm-vote">VOTE: <strong style="color: var(--accent-amber);">APPROVE</strong> (HSP Sealed)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chainlink CCIP Cross-Chain Parity Section -->
+      <div class="ccip-telemetry-section">
+        <div class="section-title-bar ccip-header-bar">
+          <span>CHAINLINK CCIP CROSS-CHAIN LIQUIDITY TELEMETRY (CHAINLINK CCIP DIRECTORY)</span>
+          <button class="btn-micro" onclick="triggerCCIPHedge()">Trigger CCIP Cross-Chain Hedge</button>
+        </div>
+        <div class="ccip-lanes-grid" id="ccip-lanes-container">
+          <div class="ccip-lane-card">
+            <div class="ccip-lane-top">
+              <span class="ccip-lane-name">Ethereum Mainnet</span>
+              <span class="ccip-selector">Selector: 5009297550715157269</span>
+            </div>
+            <div class="ccip-lane-spread" id="ccip-eth-spread">Basis: +38 bps ($3,314.50 vs $3,300.00)</div>
+          </div>
+          <div class="ccip-lane-card">
+            <div class="ccip-lane-top">
+              <span class="ccip-lane-name">Arbitrum One</span>
+              <span class="ccip-selector">Selector: 4949039107694359620</span>
+            </div>
+            <div class="ccip-lane-spread" id="ccip-arb-spread">Basis: +34 bps ($3,311.20 vs $3,300.00)</div>
+          </div>
+          <div class="ccip-lane-card">
+            <div class="ccip-lane-top">
+              <span class="ccip-lane-name">Base Mainnet</span>
+              <span class="ccip-selector">Selector: 15971525489660198786</span>
+            </div>
+            <div class="ccip-lane-spread" id="ccip-base-spread">Basis: +2 bps ($1.0002 USDT)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HSK Swap Live Pool Matrix -->
+      <div class="pools-section">
+        <div class="section-title-bar">
+          <span>HSK SWAP (app.hskswap.com) CONSTANT-PRODUCT POOL RESERVES (x · y = k)</span>
+        </div>
+        <div class="pool-grid">
+          <div class="pool-card" id="pool-card-hsk-usdt">
+            <div class="pool-card-top">
+              <span class="pool-pair">HSK / USDT</span>
+              <span class="pool-price" id="price-hsk-usdt">$0.9800</span>
+            </div>
+            <div class="pool-reserves">
+              <div class="res-row">
+                <span>HSK Reserve:</span>
+                <span class="res-val" id="res-hsk-0">845,000</span>
+              </div>
+              <div class="res-row">
+                <span>USDT Reserve:</span>
+                <span class="res-val" id="res-hsk-1">828,100</span>
+              </div>
+            </div>
+            <div class="pool-calc">
+              <span>Optimal Input (&Delta;x*):</span>
+              <span class="calc-val" id="opt-size-hsk">214.5 USDT</span>
+            </div>
+          </div>
+
+          <div class="pool-card" id="pool-card-weth-usdt">
+            <div class="pool-card-top">
+              <span class="pool-pair">WETH / USDT</span>
+              <span class="pool-price" id="price-weth-usdt">$3,300.00</span>
+            </div>
+            <div class="pool-reserves">
+              <div class="res-row">
+                <span>WETH Reserve:</span>
+                <span class="res-val" id="res-weth-0">420.0</span>
+              </div>
+              <div class="res-row">
+                <span>USDT Reserve:</span>
+                <span class="res-val" id="res-weth-1">1,386,000</span>
+              </div>
+            </div>
+            <div class="pool-calc">
+              <span>Spread vs Cross:</span>
+              <span class="calc-val" id="spread-weth">+18.4 bps</span>
+            </div>
+          </div>
+
+          <div class="pool-card" id="pool-card-hsk-weth">
+            <div class="pool-card-top">
+              <span class="pool-pair">HSK / WETH</span>
+              <span class="pool-price" id="price-hsk-weth">0.000296 WETH</span>
+            </div>
+            <div class="pool-reserves">
+              <div class="res-row">
+                <span>HSK Reserve:</span>
+                <span class="res-val" id="res-cross-0">510,000</span>
+              </div>
+              <div class="res-row">
+                <span>WETH Reserve:</span>
+                <span class="res-val" id="res-cross-1">151.2</span>
+              </div>
+            </div>
+            <div class="pool-calc">
+              <span>Triangular Path:</span>
+              <span class="calc-val highlight-val" id="tri-status">CYCLE ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Execution & Transaction Log -->
+      <div class="exec-log-section">
+        <div class="section-title-bar">
+          <span>ON-CHAIN EXECUTION LOG (VERIFIABLE HSK MAINNET TX HASHES)</span>
+        </div>
+        <div class="exec-table-wrapper">
+          <table class="exec-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>TYPE</th>
+                <th>PAIR</th>
+                <th>SIZE</th>
+                <th>SPREAD</th>
+                <th>NET PROFIT</th>
+                <th>TX HASH (SUBMITTED)</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="exec-log-body">
+              <!-- Dynamically populated execution rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLUMN 3: Non-Custodial Vault Firewall & HSP A2A Ledger (Track 2) -->
+    <section class="panel panel-right">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="panel-title">Non-Custodial Smart Vault Firewall</span>
+        </div>
+        <span class="track-badge hsp-badge">TRACK 2: HSP A2A</span>
+      </div>
+
+      <!-- Non-Custodial Role Separation Proof -->
+      <div class="vault-proof-card">
+        <div class="proof-header">
+          <span>ROLE-SEPARATED CUSTODY ARCHITECTURE</span>
+        </div>
+        <div class="proof-grid">
+          <div class="proof-item user-role">
+            <div class="role-badge">USER WITHDRAWAL KEY</div>
+            <div class="role-status">100% EXCLUSIVE OWNER CUSTODY</div>
+            <div class="role-desc">Can deposit & withdraw capital. AI cannot drain or divert.</div>
+          </div>
+          <div class="proof-item ai-role">
+            <div class="role-badge">AI SESSION OPERATOR</div>
+            <div class="role-status">SCOPED TO HSKSWAP ONLY</div>
+            <div class="role-desc">Bounded by Max Size, Slippage Cap, & Atomic Profit Guardrail.</div>
+          </div>
+        </div>
+
+        <div class="vault-balances-bar">
+          <div class="vb-item">
+            <span class="vb-label">VAULT USDT:</span>
+            <span class="vb-val" id="vault-usdt">$5,420.50</span>
+          </div>
+          <div class="vb-item">
+            <span class="vb-label">VAULT HSK:</span>
+            <span class="vb-val" id="vault-hsk">1,250.00</span>
+          </div>
+          <div class="vb-item">
+            <span class="vb-label">CIRCUIT BREAKER:</span>
+            <span class="vb-val active-status" id="cb-status">ARMED & NORMAL</span>
+          </div>
+        </div>
+
+        <div class="cb-alert-box" id="cb-alert-box" style="display: none;">
+          <div class="cb-alert-title">⚠️ CIRCUIT BREAKER ENGAGED</div>
+          <div class="cb-alert-desc" id="cb-alert-desc">Assets safely de-risked to USDT. AI session revoked.</div>
+          <button class="btn btn-warning" onclick="resetCircuitBreaker()">Reset & Re-Arm Circuit Breaker</button>
+        </div>
+      </div>
+
+      <!-- Interactive Strategy & Risk Sliders -->
+      <div class="sliders-section">
+        <div class="section-title-bar">
+          <span>AI SESSION RISK CONTROLS (SYNCED WITH CHAT)</span>
+        </div>
+        <div class="slider-control">
+          <div class="slider-labels">
+            <span>MAX TRADE SIZE (USDT)</span>
+            <span class="slider-val" id="slider-size-val">250 USDT</span>
+          </div>
+          <input type="range" min="50" max="1000" step="25" value="250" id="slider-size" oninput="onSliderChange('size', this.value)">
+        </div>
+
+        <div class="slider-control">
+          <div class="slider-labels">
+            <span>MAX SLIPPAGE TOLERANCE</span>
+            <span class="slider-val" id="slider-slip-val">35 bps (0.35%)</span>
+          </div>
+          <input type="range" min="10" max="150" step="5" value="35" id="slider-slip" oninput="onSliderChange('slip', this.value)">
+        </div>
+
+        <div class="slider-control">
+          <div class="slider-labels">
+            <span>STOP-LOSS FLOOR</span>
+            <span class="slider-val" id="slider-sl-val">1.0% (100 bps)</span>
+          </div>
+          <input type="range" min="0.5" max="5.0" step="0.1" value="1.0" id="slider-sl" oninput="onSliderChange('sl', this.value)">
+        </div>
+
+        <div class="slider-control">
+          <div class="slider-labels">
+            <span>EXECUTION SPEED</span>
+            <span class="slider-val" id="slider-freq-val">2,400 ms</span>
+          </div>
+          <input type="range" min="800" max="5000" step="200" value="2400" id="slider-freq" oninput="onSliderChange('freq', this.value)">
+        </div>
+      </div>
+
+      <!-- HSP Agent-to-Agent "Proof-of-Alpha" Stream (Track 2) -->
+      <div class="hsp-stream-section">
+        <div class="section-title-bar">
+          <span>HSP "PROOF-OF-ALPHA" A2A SETTLEMENT (project-hsp/hsp)</span>
+        </div>
+        
+        <div class="hsp-agents-row">
+          <div class="hsp-agent-badge" title="Alpha-Sentinel: On-chain flow detector">
+            <span class="agent-initial">α</span>
+            <span class="agent-name">Alpha-Sentinel</span>
+          </div>
+          <div class="hsp-arrow">⇄</div>
+          <div class="hsp-agent-badge" title="Risk-Actuary: Drawdown & VaR verifier">
+            <span class="agent-initial">ρ</span>
+            <span class="agent-name">Risk-Actuary</span>
+          </div>
+          <div class="hsp-arrow">⇄</div>
+          <div class="hsp-agent-badge" title="VeriQuant-Execution: HSK Swap router">
+            <span class="agent-initial">ξ</span>
+            <span class="agent-name">Execution-Agent</span>
+          </div>
+        </div>
+
+        <div class="hsp-rule-banner">
+          <span class="hsp-rule-tag">PAY-ONLY-FOR-PROFIT:</span>
+          <span>10% micro-fee streamed ONLY on verified net P&L. Losses receive $0.00.</span>
+        </div>
+
+        <div class="hsp-receipts-stream" id="hsp-receipts-stream">
+          <!-- Dynamically populated cryptographic settlement receipts -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- HashKey Institutional Compliance Audit Dossier Modal -->
+  <div class="modal-backdrop" id="audit-dossier-modal" style="display: none;">
+    <div class="modal-card audit-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="badge-dot pulse-emerald"></span>
+          <span class="modal-title">HashKey Institutional Compliance & Audit Dossier</span>
+          <span class="cm-score-pill" style="margin-left: 10px;">CRYPTOGRAPHICALLY VERIFIED</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeAuditModal()">&times;</button>
+      </div>
+
+      <div class="modal-body" id="audit-modal-body">
+        <div class="audit-summary-strip">
+          <div class="as-item">
+            <span class="as-label">DOSSIER ID:</span>
+            <span class="as-val text-accent-cyan" id="audit-dossier-id">HSK-INST-AUDIT-2026MUM</span>
+          </div>
+          <div class="as-item">
+            <span class="as-label">NETWORK:</span>
+            <span class="as-val text-accent-emerald">HSK Chain Mainnet (177)</span>
+          </div>
+          <div class="as-item">
+            <span class="as-label">LIVE BLOCK:</span>
+            <span class="as-val" id="audit-dossier-block">29,315,914</span>
+          </div>
+          <div class="as-item">
+            <span class="as-label">CONSENSUS:</span>
+            <span class="as-val text-accent-amber">96.4% (3 Agents)</span>
+          </div>
+        </div>
+
+        <div class="audit-sections-grid">
+          <!-- Section 1: Smart Contract Vault -->
+          <div class="audit-card">
+            <div class="audit-card-title">🛡️ Smart Contract Vault (Non-Custodial)</div>
+            <div class="audit-card-row"><span>Contract:</span><strong>VeriQuantSessionVault.sol</strong></div>
+            <div class="audit-card-row"><span>Compiler:</span><strong>Solidity 0.8.24 (200 runs)</strong></div>
+            <div class="audit-card-row"><span>Custody:</span><strong class="text-accent-emerald">100% User (No AI Drain)</strong></div>
+            <div class="audit-card-row"><span>Bytecode Hash:</span><code id="audit-vault-hash">0x7f9a8b1c4e90d23f</code></div>
+          </div>
+
+          <!-- Section 2: Chainlink CCIP Router -->
+          <div class="audit-card">
+            <div class="audit-card-title">🌐 Chainlink CCIP Directory Telemetry</div>
+            <div class="audit-card-row"><span>CCIP Lanes:</span><strong>Ethereum (5009...), Arbitrum, Base</strong></div>
+            <div class="audit-card-row"><span>Spread Threshold:</span><strong>&gt; 35 bps Basis Trigger</strong></div>
+            <div class="audit-card-row"><span>CCIP Message:</span><strong class="text-accent-cyan">Auto-Hedge Payload Signed</strong></div>
+            <div class="audit-card-row"><span>Router Status:</span><strong class="text-accent-emerald">ACTIVE &amp; BOUND</strong></div>
+          </div>
+
+          <!-- Section 3: AMM Calculus Router -->
+          <div class="audit-card">
+            <div class="audit-card-title">🐋 AMM Whale Backrun &amp; MEV Defense</div>
+            <div class="audit-card-row"><span>Pool Target:</span><strong>app.hskswap.com (x · y = k)</strong></div>
+            <div class="audit-card-row"><span>Backrun Strategy:</span><strong>Closed-Form Calculus Restoration</strong></div>
+            <div class="audit-card-row"><span>Circuit Breaker:</span><strong class="text-accent-emerald">Autonomous Stop-Loss Tripped</strong></div>
+            <div class="audit-card-row"><span>Net Reserve Surplus:</span><strong class="text-accent-emerald">+$428.60 USDT Harvested</strong></div>
+          </div>
+
+          <!-- Section 4: HSP A2A Settlement -->
+          <div class="audit-card">
+            <div class="audit-card-title">⚡ HSP Protocol (project-hsp/hsp)</div>
+            <div class="audit-card-row"><span>Settlement Mode:</span><strong>Pay-Only-For-Profit (10% Micro-Fee)</strong></div>
+            <div class="audit-card-row"><span>Agent Consensus:</span><strong>Alpha-Sentinel ⇄ Actuary ⇄ Exec</strong></div>
+            <div class="audit-card-row"><span>Loss Safeguard:</span><strong class="text-accent-emerald">Zero Payout on Drawdown</strong></div>
+            <div class="audit-card-row"><span>Settlement Receipts:</span><strong class="text-accent-cyan">18 Cryptographic Proofs</strong></div>
+          </div>
+        </div>
+
+        <div class="audit-actions-row">
+          <button class="btn btn-primary" onclick="downloadSignedAuditJson()">
+            ⬇️ Download Signed Audit JSON
+          </button>
+          <button class="btn btn-outline" onclick="openDeployerModal(); closeAuditModal();">
+            🚀 1-Click Deploy to HSK Mainnet
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MetaMask 1-Click Vault Deployer & Signer Modal -->
+  <div class="modal-backdrop" id="deployer-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span class="modal-title">Deploy VeriQuant Session Vault to HSK Chain</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeDeployerModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="deploy-steps">
+          <div class="deploy-step">
+            <span class="step-num">1</span>
+            <div class="step-info">
+              <span class="step-name">Target HSK Chain Mainnet</span>
+              <span class="step-desc">Chain ID: 177 (0xb1) • RPC: https://mainnet.hsk.xyz</span>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <span class="step-num">2</span>
+            <div class="step-info">
+              <span class="step-name">Contract: VeriQuantSessionVault.sol</span>
+              <span class="step-desc">Solidity 0.8.24 • Bytecode Size: 7,955 bytes • Optimizer 200 runs</span>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <span class="step-num">3</span>
+            <div class="step-info">
+              <span class="step-name">Delegated AI Operator</span>
+              <span class="step-desc" id="modal-operator-addr">0x3A5a0b73c4d4400E78964C1d9534720eB1E3279c</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="wallet-status-box" id="wallet-status-box">
+          <span id="wallet-status-text">MetaMask not connected yet. Click below to connect.</span>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary btn-full" id="btn-deploy-action" onclick="connectAndDeployMetaMask()">
+            1-Click Connect & Deploy to HSK Mainnet
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="pitch_director.js"></script>
+</body>
+</html>
