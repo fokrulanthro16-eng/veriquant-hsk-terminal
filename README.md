@@ -8,6 +8,7 @@
 [![HSK Chain Mainnet](https://img.shields.io/badge/HSK_Mainnet-Chain_ID_177-00E599?style=for-the-badge&logo=ethereum&logoColor=white)](https://hashkey.subscan.io)
 [![Chainlink CCIP](https://img.shields.io/badge/Chainlink-CCIP_Directory-375BD2?style=for-the-badge&logo=chainlink&logoColor=white)](https://cll-devrel.gitbook.io/ccip-assets)
 [![HSP Protocol](https://img.shields.io/badge/HSP_Protocol-A2A_Settlement-FFAA00?style=for-the-badge&logo=anchor&logoColor=white)](https://github.com/project-hsp/hsp)
+[![Vercel Ready](https://img.shields.io/badge/Vercel-Serverless_Ready-000000?style=for-the-badge&logo=vercel&logoColor=white)](vercel.json)
 [![Docker Ready](https://img.shields.io/badge/Docker-Multi--Stage_Build-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
@@ -212,6 +213,19 @@ To view live container logs:
 ```bash
 docker compose logs -f veriquant-terminal
 ```
+
+---
+
+### Option C: 1-Click Vercel Serverless Deployment
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffokrulanthro16-eng%2Fveriquant-hsk-terminal)
+
+1. Import the repository [`https://github.com/fokrulanthro16-eng/veriquant-hsk-terminal`](https://github.com/fokrulanthro16-eng/veriquant-hsk-terminal) into Vercel.
+2. The project is pre-configured with `vercel.json` for zero-configuration serverless deployment:
+   - **Static UI Edge Hosting:** Frontend assets in `public/` are served at edge CDN with zero cold starts.
+   - **Serverless API Execution:** Endpoints in `server.js` execute via lightweight Vercel Serverless Functions.
+   - **Automated REST Polling Fallback:** Real-time charts, HSK Mainnet telemetry, and consensus streams gracefully transition to HTTP REST polling to operate without WebSocket server constraints.
+3. Click **Deploy** — your live terminal will be globally accessible in ~30 seconds.
 
 ---
 
